@@ -15,17 +15,6 @@ class App extends Component {
   }
 
 
-  nameSwitchHandler =(newName)=>{
-    //console.log("was clicked");
-    //dont do this it wont work_____this.state.persons[0].name="sanu";
-    this.setState({
-      persons:[
-        {name: newName,age:"22"},
-        {name:"Shivangi",age:"21"},
-        {name:"Charu",age:"18"}
-      ]
-    })
-  }
 
   inputHandler =(event)=>{
     this.setState({
@@ -38,12 +27,17 @@ class App extends Component {
   }
 
   togglePersonHandler =()=>{
-    console.log('clicked')
     const doesShow=this.state.showPerson;
-    console.log(doesShow);
     this.setState({showPerson: !doesShow});
   }
 
+  deletePersonHandler =(personIndex)=>{
+      //const persons=this.state.persons.slice();
+      const persons= [...this.state.persons];
+      //both of the above methods are correct we use slic to copy data to const persons otherwise address would be copied
+      persons.splice(personIndex,1);
+      this.setState({persons:persons})
+  }
 
 
   render() {
@@ -60,20 +54,14 @@ class App extends Component {
     if(this.state.showPerson){
       persons=(
         <div>
-                <Person
-                  name={this.state.persons[0].name}
-                  age={this.state.persons[0].age}/>
-                <Person
-                  name={this.state.persons[1].name}
-                  age={this.state.persons[1].age}
-                  click={this.nameSwitchHandler.bind(this,"Shubhi")}
-                  changed={this.inputHandler}>
-                    My Hobby: Singing!
-                </Person>
-                <Person
-                  name={this.state.persons[2].name}
-                  age={this.state.persons[2].age}/>
-            </div>
+            {this.state.persons.map((person, index)=>{
+              return <Person
+              click={()=>this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age}/>
+            })}
+
+        </div>
       )
     }
 
