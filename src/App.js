@@ -25,6 +25,15 @@ class App extends Component {
     })
   }
 
+  inputHandler =(event)=>{
+    this.setState({
+      persons:[
+        {name:"Nishant",age:"22"},
+        {name:event.target.value,age:"21"},
+        {name:"Charu",age:"18"}
+      ]
+    })
+  }
 
 
 
@@ -39,7 +48,8 @@ class App extends Component {
         <Person
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
-          click={this.nameSwitchHandler.bind(this,"Shubhi")}>
+          click={this.nameSwitchHandler.bind(this,"Shubhi")}
+          changed={this.inputHandler}>
             My Hobby: Singing!
         </Person>
         <Person
