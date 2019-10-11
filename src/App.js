@@ -13,6 +13,7 @@ class App extends Component {
     something:"something else"
   }
 
+
   nameSwitchHandler =(newName)=>{
     //console.log("was clicked");
     //dont do this it wont work_____this.state.persons[0].name="sanu";
@@ -38,10 +39,22 @@ class App extends Component {
 
 
   render() {
+
+    const style={
+      backgroundColor:'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    }
+
     return (
       <div className="App">
         <h1>This is a react App</h1>
-        <button onClick={this.nameSwitchHandler.bind(this,"Preksha")}>Switch Name</button>
+        <button 
+          onClick={this.nameSwitchHandler.bind(this,"Preksha")}
+          style={style}>Switch Name
+        </button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}/>
